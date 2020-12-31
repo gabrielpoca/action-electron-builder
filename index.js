@@ -120,7 +120,7 @@ const runAction = () => {
 			// https://github.com/yarnpkg/yarn/issues/6894
 			const pkgJson = JSON.parse(readFileSync(pkgJsonPath, "utf8"));
 			if (pkgJson.scripts && pkgJson.scripts[buildScriptName]) {
-				run(`yarn run ${buildScriptName}`, pkgRoot);
+				run(`yarn workspace @notedown/app-desktop run ${buildScriptName}`, pkgRoot);
 			}
 		}
 	}
@@ -130,7 +130,7 @@ const runAction = () => {
 	for (let i = 0; i < maxAttempts; i += 1) {
 		try {
 			run(
-				`${useNpm ? "npx --no-install" : "yarn run"} ${cmd} --${platform} ${
+				`${useNpm ? "npx --no-install" : "yarn workspace @notedown/app-desktop run"} ${cmd} --${platform} ${
 					release ? "--publish always" : ""
 				} ${args}`,
 				appRoot,
